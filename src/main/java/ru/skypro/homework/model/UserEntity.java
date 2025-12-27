@@ -1,9 +1,8 @@
 package ru.skypro.homework.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
 import ru.skypro.homework.dto.Role;
-
-import javax.persistence.*;
 import java.util.List;
 
 @Data
@@ -36,6 +35,9 @@ public class UserEntity {
 
     @Column
     private String image;
+
+    @Column(nullable = false)
+    private Boolean enabled = true;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<AdEntity> ads;

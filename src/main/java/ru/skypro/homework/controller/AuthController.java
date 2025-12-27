@@ -70,9 +70,11 @@ public class AuthController {
             }
     )
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody Register register) {
-        if (authService.register(register)) {
-            return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<Integer> register(@RequestBody Register register) {
+        Integer userId = authService.register(register);
+
+        if (userId != null && userId > 0) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(userId);
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
